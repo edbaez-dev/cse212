@@ -8,12 +8,22 @@ public static class Arrays
     /// <returns>array of doubles that are the multiples of the supplied number</returns>
     public static double[] MultiplesOf(double number, int length)
     {
-        // TODO Problem 1 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
+        // Plan:
+        // 1. Create an array of doubles with size equal to 'length', since we need
+        //    exactly that many multiples in the result.
+        // 2. Loop from i = 0 to i = length - 1.
+        // 3. On each iteration, calculate the (i + 1)-th multiple of 'number' by
+        //    multiplying 'number' by (i + 1). This way, when i = 0 we get 1 * number,
+        //    when i = 1 we get 2 * number, and so on.
+        // 4. Store that value in the array at index i.
+        // 5. After the loop finishes, return the completed array.
 
-        return []; // replace this return statement with your own
+        var multiples = new double[length];
+        for (var i = 0; i < length; i++)
+        {
+            multiples[i] = number * (i + 1);
+        }
+        return multiples;
     }
 
     /// <summary>
@@ -25,9 +35,23 @@ public static class Arrays
     /// </summary>
     public static void RotateListRight(List<int> data, int amount)
     {
-        // TODO Problem 2 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
+        // Plan:
+        // 1. The last 'amount' elements of the list need to move to the front,
+        //    and the remaining elements (everything before them) need to follow
+        //    right after, in their original order.
+        // 2. Use GetRange to split the list into two pieces:
+        //    - The tail: the last 'amount' elements, starting at index
+        //      (data.Count - amount) and taking 'amount' elements.
+        //    - The head: everything else, from index 0 up to (data.Count - amount).
+        // 3. Clear the original list.
+        // 4. Add the tail piece first, then the head piece, so the tail now
+        //    appears at the front, followed by the rest of the original data.
+
+        var tail = data.GetRange(data.Count - amount, amount);
+        var head = data.GetRange(0, data.Count - amount);
+
+        data.Clear();
+        data.AddRange(tail);
+        data.AddRange(head);
     }
 }
